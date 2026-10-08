@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BROKEN FRONT — Karvenia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script src="js/qr.js"></script>
+</head>
+<body>
+<div id="app" tabindex="0">
+  <aside class="side" id="left">
+    <div class="panel">
+      <h3 class="stencil">Commandes</h3>
+      <ul class="keys">
+        <li><span class="k">1</span><span class="k">2</span><span class="k">3</span><span class="k">4</span><b>J1 · Choisir une carte</b></li>
+        <li><span class="k">←</span><span class="k">↑</span><span class="k">↓</span><span class="k">→</span><span class="sep">ou</span><span class="k">Z</span><span class="k">Q</span><span class="k">S</span><span class="k">D</span><b>J1 · Viseur</b></li>
+        <li><span class="k">Espace</span><span class="sep">ou</span><span class="k">Entrée</span><b>J1 · Déployer</b></li>
+        <li><span class="k">7</span><span class="k">8</span><span class="k">9</span><span class="k">0</span><b>J2 · Choisir une carte</b></li>
+        <li><span class="k">I</span><span class="k">J</span><span class="k">K</span><span class="k">L</span><b>J2 · Viseur</b></li>
+        <li><span class="k">Maj droite</span><b>J2 · Déployer</b></li>
+        <li><span class="k">Échap</span><b>Annuler / Pause</b><span class="k">P</span><b>Pause</b><span class="k">M</span><b>Son</b></li>
+      </ul>
+      <p>Mode Histoire : campagne en 12 chapitres contre l'IA. Mode 1 VS 1 : crée une salle, ton ami scanne le QR code et joue sur son téléphone en touchant les cartes puis le terrain.</p>
+    </div>
+    <div class="panel">
+      <h3 class="stencil">Objectif</h3>
+      <p style="margin-top:0">Détruis l'avant-poste adverse avant la fin du temps. Dans la dernière minute, l'élixir est doublé. En Multijoueur, chaque joueur dispose des cartes du mode histoire plus de nouveaux combattants.</p>
+    </div>
+  </aside>
+
+  <section id="center">
+    <header>
+      <div class="title-row">
+        <h1 class="stencil">BROKEN FRONT <span>— Karvenia</span></h1>
+        <div id="timerBox"><span id="x2">ÉLIXIR ×2</span><span id="timer">3:00</span></div>
+        <div class="tools">
+          <button class="ibtn" id="btnSound" title="Son (M)" aria-label="Son">♪</button>
+          <button class="ibtn" id="btnPause" title="Pause (P)" aria-label="Pause">II</button>
+        </div>
+      </div>
+      <div class="towers-row">
+        <div class="tower-hp"><div class="lbl"><span id="pTowerLabel">Ton avant-poste</span><span id="pHpTxt">120</span></div><div class="bar player"><i id="pHpFill" style="width:100%"></i></div></div>
+        <div class="vs stencil">VS</div>
+        <div class="tower-hp"><div class="lbl"><span id="eHpTxt">120</span><span id="eTowerLabel">Milice de Karvenia</span></div><div class="bar enemy"><i id="eHpFill" style="width:100%"></i></div></div>
+      </div>
+      <div id="enemyHandBar">
+        <div class="p2-label"><span class="stencil">JOUEUR 2</span><span>Élixir <b id="p2ElixirCount">5</b></span></div>
+        <div id="enemyHand"></div>
+      </div>
+    </header>
+
+    <main id="main">
+      <div id="connectionBadge">Hors ligne</div>
+      <div id="field-wrap">
+        <canvas id="field"></canvas>
+        <div id="banner"></div>
+        <div id="overlay" class="hidden"></div>
+      </div>
+    </main>
+
+    <footer>
+      <div id="hint"></div>
+      <div id="elixir-row">
+        <div id="elx-label" class="stencil">Joueur 1 · Élixir</div>
+        <div id="elx"><div id="elx-fill"></div><div id="elx-cost"></div><div id="elx-ticks"></div></div>
+        <div id="elx-count">5</div>
+      </div>
+      <div id="handrow">
+        <div id="nextBox"><span>Suivante</span><canvas id="nextArt" width="96" height="96"></canvas></div>
+        <div id="hand"></div>
+      </div>
+    </footer>
+  </section>
+
+  <aside class="side" id="right">
+    <div class="panel" id="info">
+      <h3 class="stencil">Fiche d'unité</h3>
+      <canvas id="infoArt" width="240" height="240"></canvas>
+      <div id="infoName" class="stencil">—</div>
+      <div id="infoRole"></div>
+      <span class="rar-tag" id="infoRar"></span>
+      <div class="stat"><span>Coût</span><div class="bar"><i id="bCost"></i></div><em id="vCost"></em></div>
+      <div class="stat"><span>Vie</span><div class="bar"><i id="bHp"></i></div><em id="vHp"></em></div>
+      <div class="stat"><span>Dégâts</span><div class="bar"><i id="bDmg"></i></div><em id="vDmg"></em></div>
+      <div class="stat"><span>Portée</span><div class="bar"><i id="bRng"></i></div><em id="vRng"></em></div>
+      <div class="stat"><span>Vitesse</span><div class="bar"><i id="bSpd"></i></div><em id="vSpd"></em></div>
+      <p id="infoDesc"></p>
+    </div>
+  </aside>
+</div>
+
+<!-- Modal QR pour le 1 VS 1 en ligne -->
+<div id="qrModal" class="qr-modal hidden">
+  <div class="qr-modal-content">
+    <h2 class="stencil" id="qrTitle">Salle 1 VS 1</h2>
+    <p id="qrModalStatus">Préparation…</p>
+    <canvas id="qrCanvas" width="260" height="260"></canvas>
+    <div id="qrRoomCode">—</div>
+    <div id="qrLink"></div>
+    <div class="qr-modal-actions">
+      <button class="btn" id="qrStartBtn" disabled>En attente de l'ami…</button>
+      <button class="btn ghost" id="qrCopyBtn">Copier le lien</button>
+      <button class="btn ghost" id="qrCloseBtn">Fermer</button>
+    </div>
+    <p class="qr-note">Le créateur doit garder cette fenêtre ouverte. Si le scan échoue, ton ami peut aussi saisir le code via « Rejoindre avec un code ».</p>
+  </div>
+</div>
+
+<script src="js/game.js"></script>
+</body>
+</html>

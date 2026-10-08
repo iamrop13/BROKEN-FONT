@@ -1,0 +1,74 @@
+BROKEN FRONT — KARVENIA · V4 SWAT
+
+DÉMARRAGE
+Extraire tout le ZIP, puis ouvrir index.html.
+Le mode histoire se trouve également dans histoire3d.html.
+Internet est nécessaire au démarrage pour charger Three.js r152 depuis cdnjs.
+Le modèle SWAT, ses textures et le chargeur sont intégrés dans histoire3d.html.
+Aucun téléchargement supplémentaire de modèle n'est nécessaire.
+
+NOUVEAUTÉS
+- Les ennemis de tous les chapitres utilisent le modèle SWAT fourni.
+- Le fichier possède un squelette, mais aucune animation d'origine : marche,
+  respiration, posture accroupie et recul sont animés dans le jeu.
+- Huit ennemis vivants au maximum. Les missions plus nombreuses conservent
+  leur nombre total d'adversaires grâce à des renforts.
+- Bâtiments avec fondations, encadrements, balcons, portes, toits variés,
+  climatiseurs et conduites. Béton fissuré, briques, tôles et bois procéduraux.
+- Ruines aux contours irréguliers et bunker avec renforts et équipements.
+
+DIFFICULTÉ PAR CHAPITRE
+Choisir avant de lancer :
+★ Facile : ennemis à 65 PV, tirs moins précis, réaction plus lente.
+★★ Moyen : ennemis à 100 PV, précision et réaction intermédiaires.
+★★★ Difficile : ennemis à 135 PV, tirs plus précis, réaction plus rapide.
+Le boss possède respectivement 220, 300 ou 380 PV.
+Chaque chapitre mémorise son propre réglage dans bf_chapter_difficulties.
+La progression existante utilise toujours bf_story et n'est pas effacée.
+Les cartes et le 1 VS 1 conservent leurs fichiers et leur fonctionnement.
+
+COMMANDES
+ZQSD / WASD : déplacement. Souris : regarder. Clic gauche : tirer.
+Clic droit : viser. R : recharger. C : accroupir. Maj : courir.
+Espace : sauter. E : ravitaillement, soins ou porte du bunker.
+Échap : pause. Les options graphiques et de confort restent disponibles.
+
+VÉRIFICATIONS
+Fichier HTML livré testé : chargement réel de la géométrie SWAT et de ses
+trois maillages articulés, assemblage du fusil, chemins des bots, douze
+chapitres, 36 combinaisons chapitre/difficulté, renforts, soins, victoire,
+défaite, porte, tranchée et sauvegarde des difficultés.
+Les douze textures PNG intégrées ont été vérifiées et décompressées.
+Les fichiers index.html, game.js, qr.js et style.css sont inchangés.
+Le rendu WebGL et les FPS n'ont pas été vérifiés dans un navigateur réel.
+Le résultat vise un jeu web plus détaillé, pas le photoréalisme de Bodycam.
+
+CRÉDITS
+S.W.A.T. Operator- Remastered — Mateusz Woliński (SpatialNeglect / jeandiz).
+Modèle fourni par l'utilisateur, métadonnées conservées dans le GLB intégré.
+Source : https://sketchfab.com/3d-models/swat-operator-remastered-732d2eec5a0c456bafedd08af35134c3
+Licence indiquée dans le fichier : Sketchfab Standard.
+Three.js r152 et chargeurs officiels : licence MIT, jointe au dossier.
+
+CORRECTION 4.1
+Tous les personnages sur le terrain et dans la galerie utilisent le SWAT.
+Un refus de capture souris ne met plus la partie en pause.
+ZQSD, WASD et flèches : déplacement. Sans capture souris, maintenir le clic droit pour regarder.
+Échap et le bouton pause conservent leur fonction.
+Tests ajoutés : refus synchrone/asynchrone de capture, vrais événements clavier dans la boucle de jeu, reprise après pause et présence des SWAT alliés.
+Le contrôle visuel dans un navigateur réel reste indisponible ici.
+
+
+VERSION 4.2 — ANIMATIONS ET COMBAT
+Accélération et freinage progressifs, rotation limitée, pas liés à la vitesse réelle, pas latéraux et posture de rechargement.
+Les ennemis visent puis tirent, avec son, recul et éclair au canon (désactivable par le réglage confort).
+Test de combat : un bot tire automatiquement et inflige des dégâts au joueur exposé ; un mur bloque le tir.
+Tests du modèle réel avec rendu et décodage des textures simulés. La fluidité visuelle et les FPS ne sont pas validés dans un navigateur réel.
+
+
+VERSION 4.3 — SUIVI DES COMPAGNONS
+Correction : le suivi était réservé à Marcus. Tous les compagnons suivent maintenant le joueur.
+Ils recalculent leur chemin, accélèrent pour le rattraper et s'arrêtent à proximité.
+L'animation des jambes dépend de leur déplacement réel.
+Tests : suivi de toutes les identités et animation des articulations dans les 12 chapitres, sans traverser les obstacles. Les tirs et commandes restent testés. Rendu visuel non vérifié dans un navigateur réel.
+
